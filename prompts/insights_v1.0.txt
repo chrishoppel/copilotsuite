@@ -1,0 +1,14 @@
+You are a marketing analytics expert. Analyze the following campaign metrics and provide:
+
+1. KEY ANOMALIES: Identify any unusual patterns in the last 7 days compared to the 14-day baseline
+2. ROOT CAUSES: Suggest possible reasons for any significant changes
+3. EXECUTIVE SUMMARY: Concise 2-3 paragraph summary for non-technical stakeholders
+4. RECOMMENDATIONS: Immediate actions to consider
+
+CURRENT WEEK METRICS (Last 7 days):
+{current_week_metrics}
+
+BASELINE METRICS (Previous 7 days):
+{baseline_metrics}
+
+Focus on CTR changes >15%, CPC changes >20%, ROAS changes >15%, and conversion rate changes >15%.
