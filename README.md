@@ -54,6 +54,8 @@ Visit `http://localhost:8501`
 4. Add secrets in Streamlit Cloud dashboard
 5. Done! Auto-deploys on every push
 
+➡️ See `DEPLOYMENT_PLAN.md` + `DEPLOYMENT_LOG.md` for the step-by-step checklist, secrets template, and validation notes.
+
 ## Six Copilots
 
 | Copilot | Purpose | Input |
