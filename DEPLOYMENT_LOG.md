@@ -11,6 +11,7 @@
 | 2026-04-08 20:55 | Google Ads auth tester | ✅ | Added `scripts/test_google_ads_auth.py` plus optional dependency (`google-auth`) for credential sanity checks. |
 | 2026-04-08 20:57 | Google Ads auth dry run | ⚠️ | Ran tester with placeholder JSON; structure OK, google-auth not yet installed locally so instantiation skipped. |
 | 2026-04-08 21:35 | Created sample CSV kit | ✅ | Added `samples/` directory with schema-compliant data for all five copilots + updated README. |
+| 2026-04-08 22:40 | Sample smoke tests | ✅ | `python scripts/run_sample_smoketests.py` validates every CSV against `csv_processor` schemas. |
 | 2026-04-08 22:05 | Added smoke test runner | ✅ | Authored `scripts/run_smoke_tests.py` to validate all sample CSVs via `src/csv_processor`. |
 | 2026-04-08 22:09 | Smoke test attempt | ⚠️ | `python scripts/run_smoke_tests.py` failed because pandas isn't installable on local Python 3.14 (no wheels; pip build requires VS). Will rerun inside Streamlit Cloud (Python 3.11). |
 | 2026-04-08 19:30 | README deployment notes | ✅ | Added deployment hygiene checklist pointing to plan, validator, and log. |
