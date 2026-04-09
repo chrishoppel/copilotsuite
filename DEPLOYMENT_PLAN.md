@@ -91,6 +91,17 @@ access_token = "..."
 5. Verify logs in Streamlit Cloud for any missing dependency errors.
 6. Document the production URL in `copilot-suite/README.md` (Deployment section) once confirmed.
 
+### Copilot-specific smoke tests
+| Copilot | Sample file | Expected result |
+|---------|-------------|-----------------|
+| Insights | `samples/insights_sample.csv` | Upload succeeds, anomaly recap mentions Meta CTR uptick + TikTok drop. |
+| Budget | `samples/budget_sample.csv` | Recommendations shift $10k from TikTok → Google, highlight over-investment on Meta. |
+| Creative | `samples/creative_sample.csv` | Fatigue index ranks Video Prospect as “Warning”, UGC as “Safe”. |
+| Audience | `samples/audience_sample.csv` | Flags Lookalike 1% as under-invested with opportunity notes. |
+| Forecast | `samples/forecast_sample.csv` | Generates 30/60/90 projections + scenario comparison table. |
+
+7. Run `python scripts/run_sample_smoketests.py` locally after any schema change to guarantee CSV readiness before uploading.
+
 ## 7. Next Automation Ideas
 - Add GitHub Action to run `streamlit config show` + lint before deploy.
 - Schedule nightly health check hitting the Streamlit URL and logging status to `data/uptime.json`.
