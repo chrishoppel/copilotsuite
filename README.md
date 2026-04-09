@@ -54,7 +54,7 @@ Visit `http://localhost:8501`
 4. Add secrets in Streamlit Cloud dashboard
 5. Done! Auto-deploys on every push
 
-➡️ See `DEPLOYMENT_PLAN.md` + `DEPLOYMENT_LOG.md` for the step-by-step checklist, secrets template, and validation notes.
+➡️ See `DEPLOYMENT_PLAN.md`, `DEPLOYMENT_LOG.md`, and `docs/SECRETS_READINESS.md` for the deployment checklist + secrets runbook. Use `scripts/validate_secrets.py` and `scripts/test_google_ads_auth.py` before every push.
 
 ## Six Copilots
 
@@ -110,6 +110,11 @@ copilot-suite/
 ```
 
 ## Development
+
+### Deployment hygiene
+- Use `DEPLOYMENT_PLAN.md` for the full Streamlit Cloud checklist.
+- Run `python scripts/validate_secrets.py` to confirm `.streamlit/secrets.toml` has all required keys before pushing.
+- Log each deploy/validation step in `DEPLOYMENT_LOG.md` so we have an audit trail.
 
 ### Add a new prompt version
 
