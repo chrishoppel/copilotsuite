@@ -81,6 +81,9 @@ Visit `http://localhost:8501`
 - Audience segment data
 - Historical revenue/spend
 
+### Sample Data (for smoke tests)
+All required schemas have ready-to-use CSVs in `samples/`. Upload them to validate each copilot locally or after deploying to Streamlit Cloud.
+
 ## Approval Workflow
 
 ```
