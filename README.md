@@ -84,6 +84,9 @@ Visit `http://localhost:8501`
 ### Sample Data (for smoke tests)
 All required schemas have ready-to-use CSVs in `samples/`. Upload them to validate each copilot locally or after deploying to Streamlit Cloud.
 
+### Local Smoke Tests
+Run `python scripts/run_smoke_tests.py` to validate every sample CSV against the app's validators before deploying (requires pandas from `requirements.txt`).
+
 ## Approval Workflow
 
 ```
