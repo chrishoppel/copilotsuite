@@ -2,7 +2,7 @@
 
 _Last updated: 2026-04-08_
 
-This kit turns the deployment-blocking secrets work into a repeatable checklist. Use it when collecting API credentials for Copilot Suite before pushing to Streamlit Cloud.
+This kit turns the deployment-blocking secrets work into a repeatable checklist. Use it when collecting API credentials for Copilot Suite before pushing to Streamlit Cloud. Pair it with `DEPLOYMENT_PLAN.md` for the full deployment workflow.
 
 ## 1. Inventory & Owners
 
