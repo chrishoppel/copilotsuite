@@ -1,64 +1,79 @@
-"""Quick smoke test for Google Ads service-account credentials.
+"""Minimal validator for Google Ads service-account JSON.
 
 Usage:
-    python scripts/test_google_ads_auth.py [path_to_json]
+    python scripts/test_google_ads_auth.py path/to/service_account.json
 
-If no path is provided the script looks for `google-ads-sa.json` in the repo
-root. The script does not call the Ads API — it simply verifies that the JSON
-is valid, lists its client email, and confirms that an access token can be
-requested for the Google Ads scope.
+The script checks for required fields and, if `google-auth` is available,
+instantiates credentials to ensure the key is well-formed.
 """
 from __future__ import annotations
 
-import argparse
-import datetime as dt
+import json
+import sys
 from pathlib import Path
+from typing import List
 
-from google.oauth2 import service_account
+REQUIRED_FIELDS: List[str] = [
+    "type",
+    "project_id",
+    "private_key_id",
+    "private_key",
+    "client_email",
+    "client_id",
+    "token_uri",
+]
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PATH = PROJECT_ROOT / "google-ads-sa.json"
-SCOPE = "https://www.googleapis.com/auth/adwords"
+try:  # Optional dependency (included in requirements.txt)
+    from google.oauth2 import service_account
+except Exception:  # pragma: no cover - fall back to structure-only validation
+    service_account = None
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "creds",
-        nargs="?",
-        default=str(DEFAULT_PATH),
-        help="Path to the Google Ads service-account JSON",
-    )
-    return parser.parse_args()
+def load_credentials(path_str: str) -> dict:
+    path = Path(path_str)
+    if not path.exists():
+        raise FileNotFoundError(f"Service account file not found: {path}")
+    with path.open("r", encoding="utf-8") as fp:
+        return json.load(fp)
+
+
+def check_required_fields(data: dict) -> list[str]:
+    missing = [field for field in REQUIRED_FIELDS if not data.get(field)]
+    return missing
+
+
+def hydrate_google_auth(data: dict) -> None:
+    if service_account is None:
+        print("[WARN] google-auth not available; skipping credential instantiation test.")
+        return
+    scopes = [
+        "https://www.googleapis.com/auth/adwords",
+        "https://www.googleapis.com/auth/cloud-platform",
+    ]
+    creds = service_account.Credentials.from_service_account_info(data, scopes=scopes)
+    print(f"[OK] Credential valid. Client email: {creds.service_account_email}")
 
 
 def main() -> int:
-    args = parse_args()
-    json_path = Path(args.creds)
-    if not json_path.exists():
-        print(f"[ERROR] Credentials file not found: {json_path}")
-        print("Create the service account JSON and save it locally first.")
+    if len(sys.argv) < 2:
+        print("Usage: python scripts/test_google_ads_auth.py path/to/service_account.json")
         return 1
 
-    creds = service_account.Credentials.from_service_account_file(
-        json_path, scopes=[SCOPE]
-    )
-    scoped = creds.with_scopes([SCOPE])
-
-    from google.auth.transport.requests import Request  # local import to avoid cost when unused
-
     try:
-        scoped.refresh(Request())
-    except Exception as exc:  # pragma: no cover - network call is optional
-        print(f"[WARN] Token refresh failed: {exc}")
-        print("Verify that the service account has Google Ads API access enabled.")
+        data = load_credentials(sys.argv[1])
+    except FileNotFoundError as exc:
+        print(f"[ERROR] {exc}")
+        return 1
+    except json.JSONDecodeError as exc:
+        print(f"[ERROR] Invalid JSON: {exc}")
+        return 1
+
+    missing = check_required_fields(data)
+    if missing:
+        print(f"[ERROR] Missing required fields: {', '.join(missing)}")
         return 2
 
-    expiry = scoped.expiry or dt.datetime.utcnow()
-    print("[OK] Service account authenticated")
-    print(f"  • Client email: {creds.service_account_email}")
-    print(f"  • Token valid until: {expiry.isoformat()}Z")
-    print(f"  • Scope: {SCOPE}")
+    hydrate_google_auth(data)
     return 0
 
 

@@ -8,6 +8,8 @@
 | 2026-04-08 19:07 | Secrets validation dry run | ✅ | `python scripts/validate_secrets.py` → confirmed template file parses cleanly. |
 | 2026-04-08 19:50 | Docs + script commit | ✅ | Committed `scripts/validate_secrets.py`, updated secrets readiness doc, and deployment log entries. |
 | 2026-04-08 19:52 | Git push to origin/main | ✅ | `git push origin main` succeeded post postBuffer fix. |
+| 2026-04-08 20:55 | Google Ads auth tester | ✅ | Added `scripts/test_google_ads_auth.py` plus optional dependency (`google-auth`) for credential sanity checks. |
+| 2026-04-08 20:57 | Google Ads auth dry run | ⚠️ | Ran tester with placeholder JSON; structure OK, google-auth not yet installed locally so instantiation skipped. |
 | 2026-04-08 19:30 | README deployment notes | ✅ | Added deployment hygiene checklist pointing to plan, validator, and log. |
 | 2026-04-08 19:05 | README deployment pointer | ✅ | Linked README deployment section to DEPLOYMENT_PLAN.md + DEPLOYMENT_LOG.md. |
 | 2026-04-08 19:12 | Git push verification | ✅ | Committed README + log updates and pushed to origin/main (postBuffer fix confirmed). |
