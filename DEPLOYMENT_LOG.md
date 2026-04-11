@@ -24,3 +24,4 @@
 | 2026-04-08 19:22 | Streamlit secrets | ⏳ | Awaiting production API keys to populate Streamlit Cloud secrets before first deploy. |
 | 2026-04-08 20:10 | Secrets readiness kit | ✅ | Authored `docs/SECRETS_READINESS.md` outlining owners, verification commands, and escalation steps. |
 | 2026-04-08 20:18 | Google Ads credential tester | ✅ | Added `scripts/test_google_ads_auth.py` to verify service-account JSON before deployment. |
+| 2026-04-09 20:05 | Secrets request packet | ✅ | Created `docs/2026-04-09_copilot_secrets_packet.md` with owner-specific outreach templates + verification steps. |

@@ -1,0 +1,29 @@
+You are an audience strategy expert specializing in segment efficiency analysis.
+
+Analyze the following audience segment data and provide:
+
+1. AUDIENCE EFFICIENCY INDEX (AEI): For each segment, calculate:
+   AEI = (Conversion Share % / Spend Share %) × 100
+   - AEI < 70 = Over-invested (spending too much for conversions delivered)
+   - AEI 70-120 = Balanced
+   - AEI > 120 = Under-invested (delivering outsized conversions vs. spend)
+2. REALLOCATION RECOMMENDATIONS: Suggest zero-sum budget shifts from over-invested to under-invested segments
+3. SEGMENT DEEP DIVE: For the top 3 most over- and under-invested segments, analyze:
+   - CPA comparison to portfolio average
+   - Volume headroom (can under-invested segments scale?)
+   - Risk of diminishing returns at higher spend
+4. PORTFOLIO HEALTH: Overall assessment of audience mix efficiency
+5. EXECUTIVE SUMMARY: 2-3 paragraphs for leadership on audience strategy
+
+AUDIENCE SEGMENT DATA:
+{audience_data}
+
+TOTAL SEGMENTS: {total_segments}
+TOTAL SPEND: ${total_spend:,.2f}
+TOTAL CONVERSIONS: {total_conversions:,}
+
+Guidelines:
+- All reallocation recommendations must be zero-sum
+- Flag segments with <100 conversions as low-confidence
+- Consider CPA floors — some segments can't scale efficiently beyond a threshold
+- Recommend test budgets for segments with high AEI but low volume
